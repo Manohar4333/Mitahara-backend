@@ -1,0 +1,23 @@
+// product schema 
+export interface FoodItem {
+  id: string;
+  name: string;
+  category: 'Rotis' | 'Millet based meal' | 'Millet based breakfast' | 'Curries';
+  price: number;
+  description: string;
+  benefits: string[];
+  image: string;
+}
+
+
+
+// example for above schema 
+  {
+    id: 'r2',
+    name: 'Jonna rotte (100% jonnalu)',
+    category: 'Rotis',
+    price: 25,
+    description: '100% pure Jowar. Not very soft but extremely healthy with low sugars.',
+    benefits: ['Low sugar', 'Diabetes-friendly', 'High fiber'],
+    image: 'https://picsum.photos/seed/16/400/300'
+  }
