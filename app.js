@@ -9,37 +9,14 @@ var dotenv = require("dotenv");
 dotenv.config();
 const db = process.env.VITE_DB_URL;
 
-let isConnectedBefore = false;
-
-async function connectToMongoDB() {
-  try {
-    await mongoose.connect(db, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    isConnectedBefore = true;
-    console.log("Connected to MongoDB");
-  } catch (err) {
-    console.error("Error connecting to MongoDB:", err);
-    setTimeout(connectToMongoDB, 5000); // Retry after 5 seconds
-  }
-}
-
-// mongoose
-//   .connect(db)
-//   .then(() => {
-//     console.log("Connected to DB");
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
-app.use((req, res, next) => {
-  if (!isConnectedBefore) {
-    connectToMongoDB();
-  }
-  next();
-});
+mongoose
+  .connect(db)
+  .then(() => {
+    console.log("Connected to DB");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -69,19 +46,12 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// Vercel: Do not start server, export app for serverless
-
-// const port = 4300;
-// app.listen(port, () => {
-//   console.log("server running at " + port);
-// });
+const port = 4300;
+app.listen(port, () => {
+  console.log("server running at " + port);
+});
 
 // error handler
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(3000, () => console.log('Server running on port 3000'));
-}
-
-
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
