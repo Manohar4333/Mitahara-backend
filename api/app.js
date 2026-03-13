@@ -63,6 +63,5 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-module.exports = (req, res) => {
-  app(req, res);
-};
+const serverless = require("serverless-http");
+module.exports = serverless(app);
