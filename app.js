@@ -69,10 +69,7 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-const port = process.env.PORT || 4300;
-app.listen(port, () => {
-  console.log("Server running at " + port);
-});
+// Vercel: Do not start server, export app for serverless
 
 // const port = 4300;
 // app.listen(port, () => {
