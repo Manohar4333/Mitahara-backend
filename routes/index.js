@@ -3,7 +3,11 @@ var router = express.Router();
 var products = require("../model/product");
 var mongoose = require("mongoose");
 const Order = require("../model/orders"); // Importing the orders model
+<<<<<<< HEAD
 const authRoutes = require("./auth");
+=======
+require("./auth.js");
+>>>>>>> 3f1f14b (Fix startup and deployment compatibility)
 
 /* GET home page. */
 router.get("/", function (req, res, next) {

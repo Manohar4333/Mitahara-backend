@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
     "start": "node app.js",
+=======
+    "start": "node ./bin/www",
+>>>>>>> 3f1f14b (Fix startup and deployment compatibility)
     "vercel-start": "node app.js"
   },
   "dependencies": {

@@ -7,6 +7,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var dotenv = require("dotenv");
 dotenv.config();
+<<<<<<< HEAD
 const db = process.env.VITE_DB_URL;
 
 mongoose
@@ -17,6 +18,22 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+=======
+const db = process.env.MONGODB_URI || process.env.VITE_DB_URL || process.env.MONGO_URI;
+
+if (db) {
+  mongoose
+    .connect(db)
+    .then(() => {
+      console.log("Connected to DB");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+} else {
+  console.log("MongoDB URI not configured; continuing without database connection");
+}
+>>>>>>> 3f1f14b (Fix startup and deployment compatibility)
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -46,10 +63,19 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+<<<<<<< HEAD
 const port = 4300;
 app.listen(port, () => {
   console.log("server running at " + port);
 });
+=======
+const port = process.env.PORT || 4300;
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log("server running at " + port);
+  });
+}
+>>>>>>> 3f1f14b (Fix startup and deployment compatibility)
 
 // error handler
 app.use(function (err, req, res, next) {
